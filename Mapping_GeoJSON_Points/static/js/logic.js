@@ -38,8 +38,13 @@ let airportData = "https://raw.githubusercontent.com/Melberoni/Mapping_Earthquak
 d3.json(airportData).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
-L.geoJSON(data).addTo(map);
+// L.geoJSON(data).addTo(map);
+L.geoJSON(data, {
+  onEachFeature:function(feature,layer){
+  layer.bindPopup("<h2> Airport code: "+feature.properties.faa+ "<hr/> Airport name: "+feature.properties.name+ "</h2>");}
+  }).addTo(map);
 });
+
 
 
 
@@ -81,4 +86,3 @@ L.geoJSON(data).addTo(map);
 //     layer.bindPopup("<h2> Airport code: "+feature.properties.faa+ "<hr/> Airport name: "+feature.properties.name+ "</h2>");
 //   }
 // }).addTo(map);
-
